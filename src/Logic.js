@@ -67,6 +67,13 @@ const safeNeighborhood = (board, row, column) => {
 
 const openField = (board, row, column) => {
     const field = board[row][column]
+    //Se tiver flaggad
+    //Se teve explosão
+    //Se Ganhou o jogo
+    //OpenField = False
+    if ( hadExplosion(board) || wonGame(board))
+        return false
+
     if (!field.opened) {
         field.opened = true
         if (field.mined) {
@@ -77,8 +84,10 @@ const openField = (board, row, column) => {
         } else {
             const neighbors = getNeighbors(board,row,column)
             field.nearMines = neighbors.filter(n => n.mined).length 
-        }
+        } 
+        return true
     }
+    
 }
 
 const field = board => [].concat(...board)
@@ -94,6 +103,12 @@ const showMines = board => field(board).filter(field => field.mined)
 const invertFlag = (board, row, column) => {
     const field = board[row][column]
     field.flagged = !field.flagged
+    if(wonGame(board)){
+        field.flagged = !field.flagged
+    }
+    else{
+        field.flagged = false
+    }
 }
 
 const flagsUsed = board => field(board)
