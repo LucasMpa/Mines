@@ -103,12 +103,6 @@ const showMines = board => field(board).filter(field => field.mined)
 const invertFlag = (board, row, column) => {
     const field = board[row][column]
     field.flagged = !field.flagged
-    if(wonGame(board)){
-        field.flagged = !field.flagged
-    }
-    else{
-        field.flagged = false
-    }
 }
 
 const flagsUsed = board => field(board)

@@ -52,7 +52,6 @@ export default class App extends Component {
     if (lost) {
       showMines(board)
       Alert.alert('Que pena', 'Você perdeu!')
-      this.field.flagged = false
     }
     if (won) {
       Alert.alert('Parabéns', 'Você Venceu!')
